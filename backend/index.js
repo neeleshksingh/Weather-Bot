@@ -63,6 +63,10 @@ app.use('/admin', require('./routes/admin.routes.js'));
 // Error middleware
 app.use(Error);
 
+app.get('/', (req, res) => {
+    res.send('All set!');
+});
+
 getConnection();
 app.listen(process.env.PORT || 4050, () => {
     console.log(`Listening on port ${process.env.PORT || 4050}`);
