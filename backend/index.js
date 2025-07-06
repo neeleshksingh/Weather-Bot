@@ -10,6 +10,7 @@ const cron = require('node-cron');
 
 const app = express();
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+getConnection();
 
 app.use(cors());
 app.use(express.json());
@@ -63,11 +64,14 @@ app.use('/admin', require('./routes/admin.routes.js'));
 // Error middleware
 app.use(Error);
 
-app.get('/', (req, res) => {
-    res.send('All set!');
+app.get("/", (req, res) => {
+    res.send("API IS WORKING")
 });
 
-getConnection();
+app.get("*", (req, res) => {
+    res.status(404).send("API IS NOT FOUND");
+});
+
 app.listen(process.env.PORT || 4050, () => {
     console.log(`Listening on port ${process.env.PORT || 4050}`);
 });
